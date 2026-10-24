@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconoTechBI - E-commerce & Consultoria em TI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .bg-grid {
+      background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased bg-grid">
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="logo.png" alt="EconoTechBI" class="h-16 sm:h-16 w-auto object-contain">
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#ecommerce" class="hover:text-emerald-400 transition-colors">E-commerce Hardware</a>
+        <a href="#consultoria" class="hover:text-emerald-400 transition-colors">Consultoria & BI</a>
+        <a href="#diferenciais" class="hover:text-emerald-400 transition-colors">Diferenciais</a>
+        <a href="#simulador" class="hover:text-emerald-400 transition-colors">Simulador ROI</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <a href="https://instagram.com/econotechbi" target="_blank" class="text-slate-400 hover:text-emerald-400 transition-colors text-xl">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/5532984627275?text=Olá!%20Vim%20pelo%20site%20da%20EconoTechBI%20e%20gostaria%20de%20mais%20informações." target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold px-4 py-2 rounded-lg transition-all shadow-md shadow-emerald-500/20 text-sm">
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 lg:py-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold tracking-wide uppercase mb-6">
+            <i class="fa-solid fa-bolt"></i> Gestão Estratégica e Soluções Inteligentes para o seu negócio
+          </span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+            Maximizando o retorno da sua infraestrutura <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent"> & Análise Econômica e Finaceira</span>.
+          </h1>
+          <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+            Do fornecimento das melhores peças de hardware à consultoria em produtividade e BI financeiro. Otimizamos custos e elevamos o desempenho da sua empresa.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#ecommerce" class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-center shadow-lg shadow-emerald-500/25 transition-all">
+              <i class="fa-solid fa-cart-shopping mr-2"></i> Ver Soluções Disponíveis
+            </a>
+            <a href="#consultoria" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold px-6 py-3.5 rounded-xl text-center transition-all">
+              <i class="fa-solid fa-chart-pie mr-2"></i> Agendar Consultoria
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Card Graphic -->
+        <div class="relative">
+          <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl blur-2xl opacity-20"></div>
+          <div class="relative bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              </div>
+              <span class="text-xs font-mono text-slate-500">econotechbi_dash.exe</span>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 flex justify-between items-center">
+                <div>
+                  <p class="text-xs text-slate-400 font-medium">Economia em Hardware Testado</p>
+                  <p class="text-2xl font-bold text-emerald-400">+35% ROI</p>
+                </div>
+                <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400">
+                  <i class="fa-solid fa-microchip"></i>
+                </div>
+              </div>
+
+              <div class="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 flex justify-between items-center">
+                <div>
+                  <p class="text-xs text-slate-400 font-medium">Ganho de Produtividade em TI</p>
+                  <p class="text-2xl font-bold text-blue-400">+48% Eficiência</p>
+                </div>
+                <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400">
+                  <i class="fa-solid fa-chart-column"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </section>
+
+<!-- E-commerce Featured Section -->
+<section id="ecommerce" class="py-16 bg-slate-900/50 border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <h2 class="text-3xl font-bold text-white tracking-tight">E-commerce & Soluções Disponíveis</h2>
+        <p class="text-slate-400 mt-2">Hardware revisado, testado em bancada e com garantia de custo-benefício. Soluções WebApp.</p>
+      </div>
+      <a href="#contato" class="mt-4 md:mt-0 text-emerald-400 font-semibold hover:underline flex items-center gap-2">
+        Solicitar orçamento de lote <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Item 1 (SmartComanda com Logo) -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 transition-all group">
+        <div class="h-40 bg-slate-950 rounded-lg mb-4 flex items-center justify-center p-4">
+          <!-- LOGO SMARTCOMANDA SUBTITUINDO O ÍCONE -->
+          <img src="logo_smartcomanda.png" alt="SmartComanda Logo" class="max-h-full max-w-full object-contain">
+        </div>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">SmartComanda</span>
+        <h3 class="text-lg font-semibold text-white mt-2">Solução para bares e restaurantes</h3>
+        <p class="text-sm text-slate-400 mt-1">Sistema WebApp para gerenciamento.</p>
+        <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center">
+          <span class="text-xs text-slate-500">Pronta entrega</span>
+          <button class="text-xs bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 px-3 py-1.5 rounded-lg font-semibold transition-all">Consultar Peça</button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 transition-all group">
+        <div class="h-40 bg-slate-950 rounded-lg mb-4 flex items-center justify-center text-slate-600 group-hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-plug text-5xl"></i>
+        </div>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Fontes & Energia</span>
+        <h3 class="text-lg font-semibold text-white mt-2">Fontes de Alimentação Certificadas</h3>
+        <p class="text-sm text-slate-400 mt-1">Eficiência energética para reduzir os custos operacionais da sua estrutura.</p>
+        <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center">
+          <span class="text-xs text-slate-500">Testadas em bancada</span>
+          <button class="text-xs bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 px-3 py-1.5 rounded-lg font-semibold transition-all">Consultar Peça</button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 transition-all group">
+        <div class="h-40 bg-slate-950 rounded-lg mb-4 flex items-center justify-center text-slate-600 group-hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-hard-drive text-5xl"></i>
+        </div>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">Armazenamento NVMe</span>
+        <h3 class="text-lg font-semibold text-white mt-2">SSDs High Speed corporativos</h3>
+        <p class="text-sm text-slate-400 mt-1">Carregamento ultrarrápido de dados e sistemas de gestão de BI.</p>
+        <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center">
+          <span class="text-xs text-slate-500">Garantia estendida</span>
+          <button class="text-xs bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 px-3 py-1.5 rounded-lg font-semibold transition-all">Consultar Peça</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Consultoria & BI Section -->
+  <section id="consultoria" class="py-20 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold text-white">Consultoria & Gestão Econômico-Financeira</h2>
+        <p class="text-slate-400 mt-3">Sua TI não deve ser um centro de custo, mas um motor de rentabilidade.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+          <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400 text-2xl mb-5">
+            <i class="fa-solid fa-arrow-trend-down"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Redução de Custos em TI</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Mapeamos gargalos, desperdícios de licenças e componentes obsoletos para reduzir custos de manutenção e energia.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+          <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-5">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Business Intelligence (BI)</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Dashboards visuais para acompanhamento do custo por máquina, métricas de produtividade e ROI do setor tecnológico.
+          </p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+          <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400 text-2xl mb-5">
+            <i class="fa-solid fa-gears"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Automação de Processos</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Implementação de fluxos automatizados para eliminar tarefas repetitivas e acelerar a rotina da sua equipe.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Seção: Big Data & Crypto Friendly - EconoTech BI -->
+<section id="bigdata-crypto" class="py-16 bg-slate-900 text-white border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabeçalho da Seção -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-cyan-400 font-semibold tracking-wide uppercase text-sm bg-cyan-950/50 px-3 py-1 rounded-full border border-cyan-800/50">Inovação & Inteligência de Dados</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Além do Hardware: Decisões Impulsionadas por Dados e Futuro Digital</h2>
+      <p class="text-slate-400 mt-4 text-base sm:text-lg">
+        Conectamos a sua empresa ao próximo nível da economia moderna com infraestrutura de alta performance para processamento massivo e segurança em ativos digitais.
+      </p>
+    </div>
+
+    <!-- Grid de Soluções -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      
+      <!-- Card 1: Big Data & Lucratividade -->
+      <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <!-- Ícone / Tag -->
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Big Data & Foco em Lucratividade</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            Transformamos terabytes de dados brutos e dispersos em inteligência acionável. Nossas soluções de Big Data cruzam métricas operacionais, financeiras e de TI para identificar gargalos exatos, otimizar custos e direcionar cada investimento para o **aumento real da lucratividade** do seu negócio.
+          </p>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-400 border-t border-slate-700/50 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Processamento analítico em alta velocidade</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Dashboards preditivos integrados ao BI</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Foco absoluto em margem de lucro e eficiência</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Crypto Friendly -->
+      <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <!-- Ícone / Tag -->
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Soluções Crypto Friendly</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            Estrutura tecnológica e financeira preparada para a nova economia digital. Auxiliamos empresas e empresários que operam, transacionam ou desejam integrar ativos digitais, criptomoedas e infraestrutura baseada em blockchain com total segurança jurídica, conformidade e integração contábil.
+          </p>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-400 border-t border-slate-700/50 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Consultoria para integração de ativos digitais</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Segurança de infraestrutura e nós de rede</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Alinhamento com conformidade regulatória</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Call to Action Interno -->
+    <div class="mt-12 text-center">
+      <a href="https://forms.gle/TXgGYqLsbU76nyeg7" target="_blank" class="inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg transition duration-200">
+        Falar com Especialista em Dados & Crypto
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Seção: Soluções Tributárias, Holding e Family Office - EconoTech BI -->
+<section id="tributario-holding" class="py-16 bg-slate-950 text-white border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabeçalho da Seção -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-cyan-400 font-semibold tracking-wide uppercase text-sm bg-cyan-950/50 px-3 py-1 rounded-full border border-cyan-800/50">Proteção Patrimonial & Planejamento Fiscal</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Soluções Tributárias Avançadas, Holdings e Family Office</h2>
+      <p class="text-slate-400 mt-4 text-base sm:text-lg">
+        Blindagem de patrimônio, sucessão segura e otimização fiscal sob medida para empresas de todos os tamanhos e grupos familiares.
+      </p>
+    </div>
+
+    <!-- Grid de Soluções -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      
+      <!-- Card 1: Soluções Tributárias & Otimização Fiscal -->
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <!-- Ícone -->
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Soluções Tributárias Estratégicas</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            Análise profunda da carga tributária da sua operação com foco em reestruturação fiscal legal. Identificamos créditos, revisamos regimes de tributação e implementamos estratégias para reduzir legalmente custos com impostos, maximizando o fluxo de caixa da empresa.
+          </p>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-400 border-t border-slate-800 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Revisão e planejamento de carga tributária</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Recuperação de créditos fiscais</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Conformidade e segurança jurídica (Compliance)</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Holding & Family Office -->
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <!-- Ícone -->
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Holding & Family Office</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            Estruturação de Holdings Patrimoniais e gestão integrada de Family Office. Protegemos os ativos da sua família contra riscos empresariais, facilitamos o processo de planejamento sucessório com ganho de eficiência fiscal e garantimos a perpetuidade do legado construído.
+          </p>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-400 border-t border-slate-800 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Blindagem patrimonial e sucessória</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Redução de custos com inventário e tributos imobiliários</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Gestão centralizada e profissional de ativos</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Destaque para empresas de todos os tamanhos -->
+    <div class="mt-12 bg-gradient-to-r from-cyan-950/40 via-slate-900 to-cyan-950/40 border border-cyan-800/30 rounded-2xl p-8 text-center">
+      <h3 class="text-xl font-semibold text-white mb-2">Soluções modulares para empresas de todos os tamanhos</h3>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+        Seja você um negócio em fase de estruturação ou um grupo consolidado, adaptamos nossas entregas de TI, dados, cripto e planejamento patrimonial à realidade do seu caixa e objetivos.
+      </p>
+      <a href="https://wa.me/SEUNUMERO" target="_blank" class="inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg transition duration-200">
+        Agendar Reunião com Especialista em Holdings & Tributos
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer id="contato" class="bg-slate-950 border-t border-slate-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <img src="logo.png" alt="EconoTechBI" class="h-16 w-auto mb-2 opacity-90">
+        <p class="text-xs text-slate-500">E-commerce de Hardware & Consultoria em TI</p>
+      </div>
+
+      <div class="text-center md:text-right">
+        <p class="text-xs text-slate-500">&copy; 2026 EconoTechBI. Todos os direitos reservados.</p>
+        <p class="text-xs text-slate-600 mt-1">Visite nosso perfil no Instagram para novidades diárias.</p>
+      </div>
+    </div>
+  </footer>
+
+<!-- Seção: Lucratividade, Soluções Tributárias & Fidelização - EconoTech BI -->
+<section id="lucratividade-fidelizacao" class="py-16 bg-slate-900 text-white border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabeçalho da Seção -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-cyan-400 font-semibold tracking-wide uppercase text-sm bg-cyan-950/50 px-3 py-1 rounded-full border border-cyan-800/50">Crescimento & Retenção</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Estratégias para Elevar sua Margem e Fidelizar Clientes</h2>
+      <p class="text-slate-400 mt-4 text-base sm:text-lg">
+        Unimos inteligência de dados, eficiência fiscal e experiência do cliente para transformar sua operação em uma máquina contínua de lucratividade e retenção.
+      </p>
+    </div>
+
+    <!-- Grid de Pilares -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Card 1: Foco em Lucratividade -->
+      <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Foco em Lucratividade</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Cada decisão deve gerar retorno real. Eliminamos custos invisíveis, otimizamos o capex/opex de TI e cruzamos indicadores de desempenho para garantir que o ponteiro da margem de lucro da sua empresa suba consistentemente.
+          </p>
+        </div>
+        <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-700/50 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Redução de desperdícios operacionais</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Análise de margem por produto/serviço</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Soluções Tributárias -->
+      <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Soluções Tributárias</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Otimização da carga fiscal e planejamento tributário estratégico dentro da legalidade. Reveja regimes, recupere créditos e proteja o caixa da sua empresa contra o peso excessivo dos impostos desnecessários.
+          </p>
+        </div>
+        <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-700/50 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Revisão de enquadramento fiscal</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Planejamento e eficiência tributária</li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Fidelização de Clientes -->
+      <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-8 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Fidelização de Clientes</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+            Conquistar novos clientes custa mais do que manter os atuais. Estruturamos métricas de satisfação, acompanhamento de jornada e inteligência baseada em dados para elevar o LTV (Lifetime Value) e blindar sua carteira contra a concorrência.
+          </p>
+        </div>
+        <ul class="space-y-2 text-xs text-slate-400 border-t border-slate-700/50 pt-4">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Estratégias de retenção e recorrência</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Indicadores de satisfação integrados ao BI</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Botão de Ação -->
+    <div class="mt-12 text-center">
+      <a href="https://wa.me/SEUNUMERO" target="_blank" class="inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg transition duration-200">
+        Escalar Lucratividade e Retenção no WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
