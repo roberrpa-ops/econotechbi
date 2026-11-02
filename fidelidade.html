@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconoTechBI - Módulo de Fidelização & Cashback</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-8">
+
+  <div class="max-w-5xl mx-auto space-y-8">
+    
+    <!-- Cabeçalho -->
+    <div class="border-b border-slate-800 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-extrabold text-cyan-400">EconoTechBI - Fidelidade & Retenção</h1>
+        <p class="text-slate-400 text-sm mt-1">Gestão de Cashback, Pontuação e Recorrência de Clientes</p>
+      </div>
+      <div>
+        <a href="pag_inicial.html" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-700 transition shadow">
+          <i class="fa-solid fa-arrow-left text-cyan-400"></i>
+          <span>Voltar para Página Principal</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Painel de Operações de Fidelização -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Coluna 1: Busca e Identificação de Cliente -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-user-tag text-cyan-400"></i> Identificar / Cadastrar Cliente
+        </h2>
+
+        <form id="formBuscaCliente" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Telefone / WhatsApp (Com DDD) *</label>
+            <div class="flex gap-2">
+              <input type="text" id="buscaTelefone" required placeholder="Ex: 31999998888" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+              <button type="submit" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-sm transition">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Cartão de Informações do Cliente Selecionado -->
+        <div id="cardCliente" class="hidden bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 id="clienteNome" class="text-lg font-bold text-white">---</h3>
+              <p id="clienteTel" class="text-xs text-slate-400">---</p>
+            </div>
+            <span class="bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs px-2.5 py-1 rounded-full font-semibold">Cliente Ativo</span>
+          </div>
+
+          <div class="pt-2 border-t border-slate-700/50 flex justify-between items-center">
+            <span class="text-xs text-slate-400">Saldo de Cashback Disponível:</span>
+            <span id="clienteSaldo" class="text-xl font-extrabold text-emerald-400">R$ 0,00</span>
+          </div>
+        </div>
+
+        <!-- Formulário de Cadastro Rápido (Se o cliente não existir) -->
+        <div id="boxNovoCliente" class="hidden bg-slate-800/40 border border-slate-700 rounded-xl p-4 space-y-3">
+          <p class="text-xs text-amber-400 font-medium"><i class="fa-solid fa-triangle-exclamation"></i> Cliente não encontrado. Cadastre agora:</p>
+          <form id="formNovoCliente" class="space-y-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nome Completo *</label>
+              <input type="text" id="novoNome" required placeholder="Ex: Maria Silva" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+            </div>
+            <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2 px-4 rounded-lg text-sm transition">
+              Cadastrar e Ativar Fidelidade
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Coluna 2: Lançamento de Crédito e Resgate de Cashback -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-coins text-amber-400"></i> Operação de Cashback
+        </h2>
+
+        <div id="painelOperacoes" class="opacity-50 pointer-events-none space-y-6">
+          
+          <!-- 1. Creditar Cashback sobre Nova Compra -->
+          <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 space-y-3">
+            <h3 class="text-sm font-bold text-cyan-400">1. Creditar Cashback (Nova Venda)</h3>
+            <form id="formCreditar" class="space-y-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Valor da Compra Atual (R$)</label>
+                <input type="number" id="valorVenda" step="0.01" required placeholder="Ex: 150.00" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+              </div>
+              <div class="flex justify-between items-center text-xs text-slate-400">
+                <span>Taxa de Retorno: <strong>5% de Cashback</strong></span>
+                <span id="previewCashback" class="text-emerald-400 font-bold">+ R$ 0,00</span>
+              </div>
+              <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-2 px-4 rounded-lg text-sm transition">
+                Adicionar Crédito ao Cliente
+              </button>
+            </form>
+          </div>
+
+          <!-- 2. Resgatar Desconto -->
+          <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 space-y-3">
+            <h3 class="text-sm font-bold text-amber-400">2. Resgatar Saldo na Conta</h3>
+            <form id="formResgatar" class="space-y-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Valor do Desconto a Utilizar (R$)</label>
+                <input type="number" id="valorResgate" step="0.01" required placeholder="Ex: 10.00" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+              </div>
+              <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 px-4 rounded-lg text-sm transition">
+                Utilizar Saldo como Desconto
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <div id="mensagemOperacao" class="text-sm hidden"></div>
+      </div>
+
+    </div>
+
+    <!-- Tabela de Últimas Movimentações -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <h2 class="text-xl font-bold text-white mb-4">Últimas Movimentações de Fidelidade</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-800 text-slate-400 uppercase text-xs">
+            <tr>
+              <th class="py-3 px-4">Data/Hora</th>
+              <th class="py-3 px-4">Cliente</th>
+              <th class="py-3 px-4">Tipo</th>
+              <th class="py-3 px-4">Valor Movimentado</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaHistorico" class="divide-y divide-slate-800">
+            <tr>
+              <td colspan="4" class="py-4 text-center text-slate-500">Nenhuma movimentação registrada recente.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Script de Lógica e Integração com Supabase -->
+  <script>
+    // Credenciais do Supabase mantidas no padrão do seu ecossistema
+    const SUPABASE_URL = "https://ubtgyzcdvumfxgujpshz.supabase.co"; 
+    const SUPABASE_ANON_KEY = "sb_publishable_eH09_dM0w0DreGw8JOx7mg_P1w3rZGC"; 
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let clienteAtual = null;
+    const TAXA_CASHBACK = 0.05; // 5% de retorno
+
+    // 1. Buscar Cliente por Telefone
+    document.getElementById('formBuscaCliente').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const telefone = document.getElementById('buscaTelefone').value.trim();
+      const msgStatus = document.getElementById('mensagemOperacao');
+      
+      const { data, error } = await supabaseClient
+        .from('clientes')
+        .select('*')
+        .eq('telefone', telefone)
+        .single();
+
+      if (error || !data) {
+        // Cliente não existe
+        clienteAtual = null;
+        document.getElementById('cardCliente').classList.add('hidden');
+        document.getElementById('boxNovoCliente').classList.remove('hidden');
+        desativarPainelOperacoes();
+      } else {
+        // Cliente Encontrado
+        clienteAtual = data;
+        exibirCliente(data);
+        document.getElementById('boxNovoCliente').classList.add('hidden');
+        ativarPainelOperacoes();
+      }
+    });
+
+    // Exibir dados do cliente na tela
+    function exibirCliente(cliente) {
+      document.getElementById('clienteNome').textContent = cliente.nome;
+      document.getElementById('clienteTel').textContent = "WhatsApp: " + cliente.telefone;
+      document.getElementById('clienteSaldo').textContent = `R$ ${parseFloat(cliente.saldo_cashback || 0).toFixed(2)}`;
+      document.getElementById('cardCliente').classList.remove('hidden');
+    }
+
+    // 2. Cadastrar Novo Cliente
+    document.getElementById('formNovoCliente').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const telefone = document.getElementById('buscaTelefone').value.trim();
+      const nome = document.getElementById('novoNome').value.trim();
+
+      const { data, error } = await supabaseClient
+        .from('clientes')
+        .insert([{ nome, telefone, saldo_cashback: 0 }])
+        .select()
+        .single();
+
+      if (error) {
+        alert("Erro ao cadastrar cliente: " + error.message);
+      } else {
+        clienteAtual = data;
+        exibirCliente(data);
+        document.getElementById('boxNovoCliente').classList.add('hidden');
+        ativarPainelOperacoes();
+      }
+    });
+
+    // Atualizar preview do cashback em tempo real ao digitar o valor da venda
+    document.getElementById('valorVenda').addEventListener('input', (e) => {
+      const valor = parseFloat(e.target.value) || 0;
+      const cashbackCalculado = valor * TAXA_CASHBACK;
+      document.getElementById('previewCashback').textContent = `+ R$ ${cashbackCalculado.toFixed(2)}`;
+    });
+
+    // 3. Creditar Cashback ao Cliente
+    document.getElementById('formCreditar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!clienteAtual) return;
+
+      const valorVenda = parseFloat(document.getElementById('valorVenda').value);
+      const cashbackGanho = valorVenda * TAXA_CASHBACK;
+      const novoSaldo = parseFloat(clienteAtual.saldo_cashback || 0) + cashbackGanho;
+
+      // Atualiza saldo na tabela 'clientes'
+      const { error: errCliente } = await supabaseClient
+        .from('clientes')
+        .update({ saldo_cashback: novoSaldo })
+        .eq('id', clienteAtual.id);
+
+      // Registra a transação na tabela 'historico_fidelidade'
+      const { error: errHist } = await supabaseClient
+        .from('historico_fidelidade')
+        .insert([{
+          cliente_id: clienteAtual.id,
+          tipo_operacao: 'ACUMULO',
+          valor_movimentado: cashbackGanho,
+          data_hora: new Date().toISOString()
+        }]);
+
+      if (!errCliente && !errHist) {
+        clienteAtual.saldo_cashback = novoSaldo;
+        exibirCliente(clienteAtual);
+        exibirStatus("✅ Cashback creditado com sucesso!", "emerald");
+        document.getElementById('formCreditar').reset();
+        document.getElementById('previewCashback').textContent = "+ R$ 0,00";
+        carregarHistorico();
+      } else {
+        exibirStatus("Erro ao creditar cashback.", "red");
+      }
+    });
+
+    // 4. Resgatar Desconto de Cashback
+    document.getElementById('formResgatar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!clienteAtual) return;
+
+      const valorResgate = parseFloat(document.getElementById('valorResgate').value);
+      const saldoAtual = parseFloat(clienteAtual.saldo_cashback || 0);
+
+      if (valorResgate > saldoAtual) {
+        exibirStatus("⚠️ Saldo insuficiente para realizar esse resgate.", "amber");
+        return;
+      }
+
+      const novoSaldo = saldoAtual - valorResgate;
+
+      // Atualiza saldo na tabela 'clientes'
+      const { error: errCliente } = await supabaseClient
+        .from('clientes')
+        .update({ saldo_cashback: novoSaldo })
+        .eq('id', clienteAtual.id);
+
+      // Registra resgate na tabela 'historico_fidelidade'
+      const { error: errHist } = await supabaseClient
+        .from('historico_fidelidade')
+        .insert([{
+          cliente_id: clienteAtual.id,
+          tipo_operacao: 'RESGATE',
+          valor_movimentado: valorResgate,
+          data_hora: new Date().toISOString()
+        }]);
+
+      if (!errCliente && !errHist) {
+        clienteAtual.saldo_cashback = novoSaldo;
+        exibirCliente(clienteAtual);
+        exibirStatus("✅ Desconto aplicado e saldo atualizado!", "emerald");
+        document.getElementById('formResgatar').reset();
+        carregarHistorico();
+      } else {
+        exibirStatus("Erro ao aplicar desconto.", "red");
+      }
+    });
+
+    // 5. Carregar Tabela de Histórico Recente
+    async function carregarHistorico() {
+      const tabela = document.getElementById('tabelaHistorico');
+      
+      const { data, error } = await supabaseClient
+        .from('historico_fidelidade')
+        .select('*, clientes(nome)')
+        .order('data_hora', { ascending: false })
+        .limit(5);
+
+      if (error || !data || data.length === 0) {
+        tabela.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-slate-500">Nenhuma movimentação registrada.</td></tr>`;
+        return;
+      }
+
+      tabela.innerHTML = data.map(h => {
+        const dataFormatada = new Date(h.data_hora).toLocaleString('pt-BR');
+        const isAcumulo = h.tipo_operacao === 'ACUMULO';
+        const corTipo = isAcumulo ? 'text-emerald-400 bg-emerald-950/60 border-emerald-800' : 'text-amber-400 bg-amber-950/60 border-amber-800';
+        const sinal = isAcumulo ? '+' : '-';
+        const nomeCliente = h.clientes ? h.clientes.nome : 'Cliente Desconhecido';
+
+        return `
+          <tr class="hover:bg-slate-800/50">
+            <td class="py-3 px-4 text-xs text-slate-400">${dataFormatada}</td>
+            <td class="py-3 px-4 font-semibold text-white">${nomeCliente}</td>
+            <td class="py-3 px-4">
+              <span class="text-xs px-2.5 py-1 rounded border font-semibold ${corTipo}">
+                ${h.tipo_operacao}
+              </span>
+            </td>
+            <td class="py-3 px-4 font-bold ${isAcumulo ? 'text-emerald-400' : 'text-amber-400'}">
+              ${sinal} R$ ${parseFloat(h.valor_movimentado).toFixed(2)}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Funções Auxiliares de UI
+    function ativarPainelOperacoes() {
+      document.getElementById('painelOperacoes').classList.remove('opacity-50', 'pointer-events-none');
+    }
+
+    function desativarPainelOperacoes() {
+      document.getElementById('painelOperacoes').classList.add('opacity-50', 'pointer-events-none');
+    }
+
+    function exibirStatus(texto, cor) {
+      const msg = document.getElementById('mensagemOperacao');
+      msg.className = `mt-4 text-sm font-semibold text-${cor}-400`;
+      msg.textContent = texto;
+      msg.classList.remove('hidden');
+    }
+
+    // Carregar histórico ao iniciar a página
+    window.onload = carregarHistorico;
+  </script>
+</body>
+</html>
