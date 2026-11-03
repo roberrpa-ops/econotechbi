@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EconoMarketPlace | EconoTechBI</title>
+  <meta name="description" content="Hardware revisado e testado em bancada, com garantia e melhor custo-benefício. EconoMarketPlace da EconoTechBI.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .bg-grid {
+      background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    /* Barra de rolagem discreta combinando com o tema */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    .drawer { transition: transform .3s ease; }
+    .drawer.closed { transform: translateX(100%); }
+    .overlay { transition: opacity .3s ease; }
+    .overlay.closed { opacity: 0; pointer-events: none; }
+    .toast { transition: transform .3s ease, opacity .3s ease; }
+    .toast.hide { transform: translateY(20px); opacity: 0; pointer-events: none; }
+
+    input[type=range] { accent-color: #10b981; }
+    :focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      .drawer, .overlay, .toast { transition: none; }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased bg-grid">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center shrink-0" aria-label="Voltar ao site EconoTechBI">
+        <img src="logo.png" alt="EconoTechBI" class="h-14 sm:h-16 w-auto object-contain">
+      </a>
+
+      <!-- Busca (desktop) -->
+      <div class="hidden md:block flex-1 max-w-xl relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+        <input id="searchDesktop" type="search" placeholder="Buscar produtos, marcas ou categorias"
+          class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl pl-11 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none transition-colors">
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="index.html#ecommerce" class="hidden lg:inline text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-arrow-left mr-1 text-xs"></i> Voltar ao site
+        </a>
+        <button id="openCart" class="relative bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm font-semibold transition-all" aria-label="Abrir carrinho">
+          <i class="fa-solid fa-cart-shopping mr-1"></i>
+          <span class="hidden sm:inline">Carrinho</span>
+          <span id="cartCount" class="absolute -top-2 -right-2 min-w-[1.25rem] h-5 px-1 rounded-full bg-emerald-500 text-slate-950 text-xs font-bold flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+    <!-- Busca (mobile) -->
+    <div class="md:hidden px-4 pb-3 relative">
+      <i class="fa-solid fa-magnifying-glass absolute left-8 top-1/2 -translate-y-[70%] text-slate-500 text-sm"></i>
+      <input id="searchMobile" type="search" placeholder="Buscar produtos"
+        class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl pl-11 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none">
+    </div>
+  </header>
+
+  <!-- Hero / Promoções -->
+  <section class="py-10 lg:py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative">
+        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl blur-2xl opacity-20"></div>
+        <div class="relative bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 grid lg:grid-cols-5 gap-8 items-center">
+          <div class="lg:col-span-3">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-5">
+              <i class="fa-solid fa-tags"></i> Promoções da semana
+            </span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+              Hardware testado em bancada, com <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">garantia e preço justo</span>.
+            </h1>
+            <p class="text-slate-400 leading-relaxed mb-6 max-w-xl">
+              Escolha seus itens, monte o carrinho e finalize direto com a nossa equipe pelo WhatsApp. Sem cadastro e sem complicação.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="#produtos" class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-slate-950 font-bold px-6 py-3 rounded-xl text-center shadow-lg shadow-emerald-500/25 transition-all">
+                <i class="fa-solid fa-bag-shopping mr-2"></i> Ver produtos
+              </a>
+              <button id="btnPromo" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold px-6 py-3 rounded-xl transition-all">
+                <i class="fa-solid fa-fire mr-2 text-amber-400"></i> Só promoções
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 grid grid-cols-1 gap-3">
+            <div class="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 flex items-center gap-4">
+              <div class="w-10 h-10 shrink-0 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+              <div><p class="text-sm font-semibold text-white">Testado e revisado</p><p class="text-xs text-slate-400">Cada item passa por bateria de testes em bancada.</p></div>
+            </div>
+            <div class="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 flex items-center gap-4">
+              <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400"><i class="fa-solid fa-shield-halved"></i></div>
+              <div><p class="text-sm font-semibold text-white">Garantia inclusa</p><p class="text-xs text-slate-400">Cobertura informada em cada produto.</p></div>
+            </div>
+            <div class="p-4 bg-slate-950/60 rounded-xl border border-slate-800/80 flex items-center gap-4">
+              <div class="w-10 h-10 shrink-0 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400"><i class="fa-brands fa-whatsapp text-lg"></i></div>
+              <div><p class="text-sm font-semibold text-white">Atendimento direto</p><p class="text-xs text-slate-400">Fechamento do pedido pelo WhatsApp.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <section id="produtos" class="py-10 bg-slate-900/50 border-t border-slate-800 scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-4 gap-8">
+
+        <!-- Filtros -->
+        <aside class="lg:col-span-1">
+          <div class="lg:sticky lg:top-28 bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-6">
+            <div>
+              <h2 class="text-sm font-semibold text-white mb-3">Categorias</h2>
+              <div id="catList" class="flex lg:flex-col gap-2 overflow-x-auto pb-1 lg:pb-0"></div>
+            </div>
+
+            <div>
+              <h2 class="text-sm font-semibold text-white mb-3">Condição</h2>
+              <div class="space-y-2 text-sm text-slate-300">
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="condFilter accent-emerald-500" value="Revisado" checked> Revisado</label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="condFilter accent-emerald-500" value="Novo" checked> Novo</label>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-semibold text-white">Preço máximo</h2>
+                <span id="priceLabel" class="text-xs font-mono text-emerald-400"></span>
+              </div>
+              <input id="priceRange" type="range" min="0" max="5000" step="50" value="5000" class="w-full">
+            </div>
+
+            <button id="clearFilters" class="w-full text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg font-semibold transition-all">
+              Limpar filtros
+            </button>
+          </div>
+        </aside>
+
+        <!-- Lista -->
+        <div class="lg:col-span-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div>
+              <h2 class="text-2xl font-bold text-white tracking-tight">Produtos</h2>
+              <p id="resultInfo" class="text-sm text-slate-400"></p>
+            </div>
+            <label class="flex items-center gap-2 text-sm text-slate-400">
+              Ordenar por
+              <select id="sortSelect" class="bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-lg px-3 py-2 text-sm text-slate-200 outline-none">
+                <option value="relevance">Destaques</option>
+                <option value="price-asc">Menor preço</option>
+                <option value="price-desc">Maior preço</option>
+                <option value="discount">Maior desconto</option>
+                <option value="name">Nome (A-Z)</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="grid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+
+          <div id="empty" class="hidden text-center py-16 bg-slate-900 border border-slate-800 rounded-xl">
+            <i class="fa-solid fa-box-open text-4xl text-slate-600 mb-4"></i>
+            <p class="text-white font-semibold">Nenhum produto encontrado</p>
+            <p class="text-sm text-slate-400 mt-1 mb-5">Ajuste a busca ou limpe os filtros para ver todos os itens.</p>
+            <button id="emptyClear" class="text-sm bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold px-4 py-2 rounded-lg transition-all">Limpar filtros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quero meu marketplace -->
+  <section class="py-16 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-900 border border-slate-800 hover:border-cyan-500/50 transition duration-300 rounded-2xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 shrink-0 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 border border-cyan-500/20 text-xl">
+            <i class="fa-solid fa-store"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-2">Quer um marketplace como este para o seu negócio?</h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl">Construímos sua loja virtual com catálogo, carrinho e atendimento por WhatsApp, com a sua marca e pronta para vender.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/5532984627275?text=Olá!%20Vi%20o%20EconoMarketPlace%20e%20quero%20um%20marketplace%20para%20o%20meu%20negócio." target="_blank" rel="noopener"
+          class="shrink-0 inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg transition duration-200">
+          Quero meu marketplace
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <img src="logo.png" alt="EconoTechBI" class="h-16 w-auto mb-2 opacity-90">
+        <p class="text-xs text-slate-500">E-commerce de Hardware & Consultoria em TI</p>
+      </div>
+      <div class="flex items-center gap-5 text-xl text-slate-400">
+        <a href="https://instagram.com/econotechbi" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/5532984627275" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <div class="text-center md:text-right">
+        <p class="text-xs text-slate-500">&copy; 2026 EconoTechBI. Todos os direitos reservados.</p>
+        <a href="index.html" class="text-xs text-slate-600 hover:text-emerald-400 mt-1 inline-block">Voltar ao site principal</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay closed fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm"></div>
+
+  <!-- Carrinho -->
+  <aside id="drawer" class="drawer closed fixed top-0 right-0 z-50 h-full w-full max-w-md bg-slate-900 border-l border-slate-800 flex flex-col" aria-label="Carrinho de compras">
+    <div class="flex items-center justify-between p-5 border-b border-slate-800">
+      <h2 class="text-lg font-bold text-white"><i class="fa-solid fa-cart-shopping text-emerald-400 mr-2"></i>Seu carrinho</h2>
+      <button id="closeCart" class="text-slate-400 hover:text-white text-xl" aria-label="Fechar carrinho"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+    <div class="p-5 border-t border-slate-800 space-y-4">
+      <div class="flex items-center justify-between text-sm text-slate-400">
+        <span>Subtotal</span><span id="cartSubtotal" class="text-white font-semibold">R$ 0,00</span>
+      </div>
+      <div class="flex items-center justify-between text-xs text-slate-500">
+        <span>Frete e condições de pagamento combinados no atendimento.</span>
+      </div>
+      <button id="checkout" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all">
+        <i class="fa-brands fa-whatsapp mr-2"></i> Finalizar pelo WhatsApp
+      </button>
+      <button id="clearCart" class="w-full text-xs text-slate-500 hover:text-red-400 transition-colors">Esvaziar carrinho</button>
+    </div>
+  </aside>
+
+  <!-- Modal de produto -->
+  <div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div id="modalBg" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"></div>
+    <div class="relative bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <button id="closeModal" class="absolute top-4 right-4 z-10 text-slate-400 hover:text-white text-xl" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Aviso -->
+  <div id="toast" class="toast hide fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-slate-800 border border-emerald-500/40 text-slate-100 text-sm px-5 py-3 rounded-xl shadow-xl"></div>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — edite aqui
+   ========================================================= */
+const WHATSAPP = "5532984627275";
+
+/* Catálogo de produtos.
+   cond: "Novo" | "Revisado"   |  old: preço antigo (use 0 se não houver promoção)
+   icon: ícone Font Awesome (ex.: "fa-laptop")
+   img: (opcional) caminho da foto, ex.: "produtos/ssd.png" */
+const PRODUCTS = [
+  { id:1,  name:"Notebook Dell Latitude 5490 i5 8ª Ger. 8GB 256GB SSD", cat:"Notebooks", cond:"Revisado", price:1790, old:2290, icon:"fa-laptop", stock:6, warranty:"90 dias",
+    desc:"Ideal para escritório e uso corporativo. Equipamento revisado, com limpeza interna e troca de pasta térmica.",
+    specs:["Intel Core i5 8ª geração","8GB DDR4","SSD 256GB","Tela 14\" HD","Windows 11 instalado"] },
+  { id:2,  name:"Notebook Lenovo ThinkPad T480 i5 16GB 480GB SSD", cat:"Notebooks", cond:"Revisado", price:2190, old:0, icon:"fa-laptop", stock:3, warranty:"90 dias",
+    desc:"Robusto, com ótimo teclado e bateria de longa duração. Excelente para quem trabalha em movimento.",
+    specs:["Intel Core i5 8ª geração","16GB DDR4","SSD 480GB","Tela 14\" Full HD","Bateria testada"] },
+  { id:3,  name:"Desktop SFF HP ProDesk i5 8GB 240GB SSD", cat:"Computadores", cond:"Revisado", price:1190, old:1490, icon:"fa-desktop", stock:10, warranty:"90 dias",
+    desc:"Desktop compacto, silencioso e econômico em energia. Ótimo custo-benefício para frente de loja e escritório.",
+    specs:["Intel Core i5","8GB DDR4","SSD 240GB","Formato compacto (SFF)","Windows 11 instalado"] },
+  { id:4,  name:"PC Gamer Ryzen 5 5600 16GB RTX 3050 SSD 500GB", cat:"Computadores", cond:"Novo", price:4290, old:4790, icon:"fa-computer", stock:2, warranty:"12 meses",
+    desc:"Configuração montada e testada para jogos em Full HD e trabalho com edição leve de vídeo.",
+    specs:["AMD Ryzen 5 5600","16GB DDR4 3200MHz","RTX 3050 8GB","SSD NVMe 500GB","Fonte 550W 80 Plus"] },
+  { id:5,  name:"SSD Kingston NV2 NVMe 500GB", cat:"Armazenamento", cond:"Novo", price:279, old:339, icon:"fa-hard-drive", stock:25, warranty:"36 meses",
+    desc:"Dê um salto de desempenho no seu computador com carregamento rápido de sistema e programas.",
+    specs:["Capacidade 500GB","Interface NVMe PCIe 4.0","Leitura até 3.500 MB/s","Formato M.2 2280"] },
+  { id:6,  name:"SSD SATA 480GB 2,5\" revisado", cat:"Armazenamento", cond:"Revisado", price:139, old:0, icon:"fa-hard-drive", stock:30, warranty:"90 dias",
+    desc:"Upgrade barato e eficiente para notebooks e desktops mais antigos. Saúde do disco verificada.",
+    specs:["Capacidade 480GB","Interface SATA III","Formato 2,5\"","Saúde acima de 90%"] },
+  { id:7,  name:"Memória RAM DDR4 8GB 3200MHz", cat:"Componentes", cond:"Novo", price:129, old:159, icon:"fa-memory", stock:40, warranty:"12 meses",
+    desc:"Mais fluidez para multitarefa. Compatível com a maioria das placas-mãe DDR4.",
+    specs:["8GB DDR4","3200MHz","Desktop (DIMM)","1,35V"] },
+  { id:8,  name:"Placa de Vídeo GTX 1660 Super 6GB", cat:"Componentes", cond:"Revisado", price:1090, old:1390, icon:"fa-microchip", stock:4, warranty:"90 dias",
+    desc:"Excelente desempenho em Full HD. Testada com estresse térmico e benchmark antes da venda.",
+    specs:["NVIDIA GTX 1660 Super","6GB GDDR6","Saída HDMI e DisplayPort","Testada em bancada"] },
+  { id:9,  name:"Monitor LED 24\" Full HD IPS 75Hz", cat:"Monitores", cond:"Novo", price:589, old:699, icon:"fa-tv", stock:12, warranty:"12 meses",
+    desc:"Imagem nítida com bom ângulo de visão, ideal para escritório, estudos e entretenimento.",
+    specs:["24 polegadas","Full HD 1920x1080","Painel IPS","75Hz","HDMI + VGA"] },
+  { id:10, name:"Monitor Dell 19\" revisado", cat:"Monitores", cond:"Revisado", price:229, old:0, icon:"fa-tv", stock:18, warranty:"90 dias",
+    desc:"Monitor simples e confiável para postos de trabalho e PDV. Sem manchas ou pixels mortos.",
+    specs:["19 polegadas","HD+","VGA/DVI","Com base e cabo"] },
+  { id:11, name:"Kit Teclado e Mouse sem fio", cat:"Periféricos", cond:"Novo", price:119, old:149, icon:"fa-keyboard", stock:35, warranty:"12 meses",
+    desc:"Conexão USB sem fio, teclas silenciosas e bateria de longa duração.",
+    specs:["Receptor USB 2.4GHz","Teclado ABNT2","Mouse 1200 DPI","Pilhas inclusas"] },
+  { id:12, name:"Roteador Wi-Fi 6 Dual Band AX1500", cat:"Redes", cond:"Novo", price:259, old:319, icon:"fa-wifi", stock:15, warranty:"12 meses",
+    desc:"Wi-Fi mais rápido e estável para vários dispositivos conectados ao mesmo tempo.",
+    specs:["Wi-Fi 6 (802.11ax)","Dual Band","4 antenas","Portas Gigabit"] },
+  { id:13, name:"Switch Gigabit 8 portas", cat:"Redes", cond:"Novo", price:149, old:0, icon:"fa-network-wired", stock:20, warranty:"12 meses",
+    desc:"Expanda sua rede cabeada com velocidade Gigabit e instalação plug and play.",
+    specs:["8 portas 10/100/1000","Sem configuração","Carcaça metálica","Bivolt"] },
+  { id:14, name:"Nobreak 600VA bivolt", cat:"Periféricos", cond:"Novo", price:339, old:389, icon:"fa-battery-full", stock:9, warranty:"12 meses",
+    desc:"Protege seus equipamentos contra quedas de energia e variações da rede elétrica.",
+    specs:["600VA","6 tomadas","Bivolt automático","Estabilizador interno"] }
+];
+
+/* =========================================================
+   LÓGICA
+   ========================================================= */
+const $ = (s) => document.querySelector(s);
+const brl = (v) => v.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+const state = { cat:"Todos", search:"", maxPrice:5000, promoOnly:false, sort:"relevance", cart:{} };
+
+/* Carrinho salvo no navegador (protegido caso o armazenamento esteja indisponível) */
+try { state.cart = JSON.parse(localStorage.getItem("econo_cart") || "{}"); } catch (e) { state.cart = {}; }
+const saveCart = () => { try { localStorage.setItem("econo_cart", JSON.stringify(state.cart)); } catch (e) {} };
+
+const discount = (p) => p.old > p.price ? Math.round((1 - p.price / p.old) * 100) : 0;
+const byId = (id) => PRODUCTS.find(p => p.id === Number(id));
+
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.remove("hide");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.add("hide"), 2200);
+}
+
+/* ---------- Categorias ---------- */
+function renderCats() {
+  const cats = ["Todos", ...new Set(PRODUCTS.map(p => p.cat))];
+  $("#catList").innerHTML = cats.map(c => {
+    const n = c === "Todos" ? PRODUCTS.length : PRODUCTS.filter(p => p.cat === c).length;
+    const active = state.cat === c;
+    return `<button data-cat="${c}" class="shrink-0 flex items-center justify-between gap-3 text-sm px-3 py-2 rounded-lg border transition-all ${active
+      ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400 font-semibold"
+      : "bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-600"}">
+      <span>${c}</span><span class="text-xs text-slate-500">${n}</span></button>`;
+  }).join("");
+}
+
+/* ---------- Produtos ---------- */
+function filtered() {
+  const conds = [...document.querySelectorAll(".condFilter:checked")].map(i => i.value);
+  const q = state.search.trim().toLowerCase();
+  let list = PRODUCTS.filter(p =>
+    (state.cat === "Todos" || p.cat === state.cat) &&
+    conds.includes(p.cond) &&
+    p.price <= state.maxPrice &&
+    (!state.promoOnly || discount(p) > 0) &&
+    (!q || (p.name + " " + p.cat + " " + p.desc).toLowerCase().includes(q))
+  );
+  const s = state.sort;
+  if (s === "price-asc") list.sort((a,b) => a.price - b.price);
+  if (s === "price-desc") list.sort((a,b) => b.price - a.price);
+  if (s === "discount") list.sort((a,b) => discount(b) - discount(a));
+  if (s === "name") list.sort((a,b) => a.name.localeCompare(b.name, "pt-BR"));
+  return list;
+}
+
+function cardHTML(p) {
+  const d = discount(p);
+  const media = p.img
+    ? `<img src="${p.img}" alt="${p.name}" class="max-h-full max-w-full object-contain">`
+    : `<i class="fa-solid ${p.icon} text-5xl text-slate-600 group-hover:text-emerald-400 transition-colors"></i>`;
+  const condColor = p.cond === "Novo" ? "text-blue-400 bg-blue-500/10" : "text-emerald-400 bg-emerald-500/10";
+  const low = p.stock <= 3 ? `<span class="text-xs text-amber-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Últimas ${p.stock} un.</span>` : `<span class="text-xs text-slate-500">Em estoque</span>`;
+  return `
+  <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/50 transition-all group flex flex-col">
+    <button data-detail="${p.id}" class="text-left" aria-label="Ver detalhes de ${p.name}">
+      <div class="relative h-40 bg-slate-950 rounded-lg mb-4 flex items-center justify-center p-4">
+        ${media}
+        ${d ? `<span class="absolute top-2 left-2 text-xs font-bold bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md">-${d}%</span>` : ""}
+      </div>
+      <span class="text-xs font-mono ${condColor} px-2.5 py-1 rounded-md">${p.cond}</span>
+      <h3 class="text-base font-semibold text-white mt-2 leading-snug">${p.name}</h3>
+    </button>
+    <p class="text-xs text-slate-500 mt-1">${p.cat}</p>
+    <div class="mt-auto pt-4">
+      ${p.old > p.price ? `<p class="text-xs text-slate-500 line-through">${brl(p.old)}</p>` : `<p class="text-xs">&nbsp;</p>`}
+      <p class="text-2xl font-bold text-emerald-400">${brl(p.price)}</p>
+      <p class="text-xs text-slate-400">ou 12x de ${brl(p.price / 12)} <span class="text-slate-600">(consulte juros)</span></p>
+      <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center">
+        ${low}
+        <button data-add="${p.id}" class="text-xs bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 px-3 py-1.5 rounded-lg font-semibold transition-all">
+          <i class="fa-solid fa-cart-plus mr-1"></i> Adicionar
+        </button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGrid() {
+  const list = filtered();
+  $("#grid").innerHTML = list.map(cardHTML).join("");
+  $("#empty").classList.toggle("hidden", list.length > 0);
+  $("#resultInfo").textContent = `${list.length} ${list.length === 1 ? "item encontrado" : "itens encontrados"}`;
+  $("#priceLabel").textContent = "até " + brl(state.maxPrice);
+  $("#btnPromo").classList.toggle("ring-2", state.promoOnly);
+  $("#btnPromo").classList.toggle("ring-emerald-500", state.promoOnly);
+}
+
+/* ---------- Carrinho ---------- */
+function cartEntries() {
+  return Object.entries(state.cart).map(([id, qty]) => ({ p: byId(id), qty })).filter(e => e.p);
+}
+
+function renderCart() {
+  const items = cartEntries();
+  const count = items.reduce((s, e) => s + e.qty, 0);
+  const total = items.reduce((s, e) => s + e.qty * e.p.price, 0);
+  $("#cartCount").textContent = count;
+  $("#cartSubtotal").textContent = brl(total);
+  $("#checkout").disabled = count === 0;
+
+  $("#cartItems").innerHTML = items.length ? items.map(({ p, qty }) => `
+    <div class="flex gap-3 bg-slate-950/60 border border-slate-800 rounded-xl p-3">
+      <div class="w-16 h-16 shrink-0 bg-slate-950 rounded-lg flex items-center justify-center text-slate-600 overflow-hidden">
+        ${p.img ? `<img src="${p.img}" alt="" class="max-h-full max-w-full object-contain">` : `<i class="fa-solid ${p.icon} text-2xl"></i>`}
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm text-white font-medium leading-snug line-clamp-2">${p.name}</p>
+        <p class="text-sm text-emerald-400 font-semibold mt-1">${brl(p.price)}</p>
+        <div class="flex items-center justify-between mt-2">
+          <div class="flex items-center border border-slate-700 rounded-lg">
+            <button data-dec="${p.id}" class="w-7 h-7 text-slate-300 hover:text-emerald-400" aria-label="Diminuir">−</button>
+            <span class="w-8 text-center text-sm">${qty}</span>
+            <button data-inc="${p.id}" class="w-7 h-7 text-slate-300 hover:text-emerald-400" aria-label="Aumentar">+</button>
+          </div>
+          <button data-del="${p.id}" class="text-xs text-slate-500 hover:text-red-400" aria-label="Remover"><i class="fa-regular fa-trash-can"></i></button>
+        </div>
+      </div>
+    </div>`).join("")
+  : `<div class="text-center py-16">
+       <i class="fa-solid fa-cart-shopping text-4xl text-slate-700 mb-4"></i>
+       <p class="text-white font-semibold">Seu carrinho está vazio</p>
+       <p class="text-sm text-slate-400 mt-1">Adicione produtos para montar seu pedido.</p>
+     </div>`;
+}
+
+function addToCart(id, qty = 1) {
+  const p = byId(id);
+  const cur = state.cart[id] || 0;
+  if (cur + qty > p.stock) { toast("Quantidade máxima em estoque atingida"); return; }
+  state.cart[id] = cur + qty;
+  saveCart(); renderCart();
+  toast("Adicionado ao carrinho");
+}
+function setQty(id, qty) {
+  const p = byId(id);
+  if (qty <= 0) delete state.cart[id];
+  else if (qty > p.stock) { toast("Quantidade máxima em estoque atingida"); return; }
+  else state.cart[id] = qty;
+  saveCart(); renderCart();
+}
+
+function openCart() { $("#drawer").classList.remove("closed"); $("#overlay").classList.remove("closed"); }
+function closeCart() { $("#drawer").classList.add("closed"); $("#overlay").classList.add("closed"); }
+
+function checkout() {
+  const items = cartEntries();
+  if (!items.length) return;
+  const total = items.reduce((s, e) => s + e.qty * e.p.price, 0);
+  const linhas = items.map(({ p, qty }) => `• ${qty}x ${p.name} - ${brl(p.price * qty)}`).join("\n");
+  const msg = `Olá! Quero fechar este pedido do EconoMarketPlace:\n\n${linhas}\n\nTotal: ${brl(total)}\n\nPoderiam confirmar disponibilidade, frete e forma de pagamento?`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+}
+
+/* ---------- Modal ---------- */
+function openModal(id) {
+  const p = byId(id), d = discount(p);
+  const media = p.img
+    ? `<img src="${p.img}" alt="${p.name}" class="max-h-full max-w-full object-contain">`
+    : `<i class="fa-solid ${p.icon} text-7xl text-emerald-400/80"></i>`;
+  $("#modalContent").innerHTML = `
+    <div class="grid md:grid-cols-2">
+      <div class="relative bg-slate-950 md:rounded-l-2xl rounded-t-2xl md:rounded-tr-none flex items-center justify-center min-h-[220px] p-8">
+        ${media}
+        ${d ? `<span class="absolute top-4 left-4 text-xs font-bold bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md">-${d}%</span>` : ""}
+      </div>
+      <div class="p-6 sm:p-8">
+        <span class="text-xs font-mono ${p.cond === "Novo" ? "text-blue-400 bg-blue-500/10" : "text-emerald-400 bg-emerald-500/10"} px-2.5 py-1 rounded-md">${p.cond}</span>
+        <h2 class="text-xl font-bold text-white mt-3 leading-snug">${p.name}</h2>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">${p.desc}</p>
+        <ul class="mt-4 space-y-1.5 text-sm text-slate-300">
+          ${p.specs.map(s => `<li class="flex items-start"><span class="text-emerald-400 mr-2">✓</span>${s}</li>`).join("")}
+        </ul>
+        <div class="mt-5 flex gap-4 text-xs text-slate-400">
+          <span><i class="fa-solid fa-shield-halved text-blue-400 mr-1"></i>Garantia: ${p.warranty}</span>
+          <span><i class="fa-solid fa-box text-blue-400 mr-1"></i>${p.stock} em estoque</span>
+        </div>
+        <div class="mt-6 pt-5 border-t border-slate-800">
+          ${p.old > p.price ? `<p class="text-xs text-slate-500 line-through">${brl(p.old)}</p>` : ""}
+          <p class="text-3xl font-bold text-emerald-400">${brl(p.price)}</p>
+          <p class="text-xs text-slate-400 mb-4">ou 12x de ${brl(p.price / 12)} (consulte juros)</p>
+          <div class="flex gap-3">
+            <button data-add="${p.id}" data-close class="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-slate-950 font-bold px-5 py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition-all">
+              <i class="fa-solid fa-cart-plus mr-2"></i> Adicionar ao carrinho
+            </button>
+            <a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Tenho uma dúvida sobre: " + p.name)}" target="_blank" rel="noopener"
+              class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-4 py-3 rounded-xl transition-all" aria-label="Tirar dúvida no WhatsApp">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  $("#modal").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() { $("#modal").classList.add("hidden"); document.body.style.overflow = ""; }
+
+/* ---------- Eventos ---------- */
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("button, a");
+  if (!t) return;
+  if (t.dataset.cat) { state.cat = t.dataset.cat; renderCats(); renderGrid(); }
+  if (t.dataset.add) { addToCart(t.dataset.add); if (t.hasAttribute("data-close")) closeModal(); }
+  if (t.dataset.detail) openModal(t.dataset.detail);
+  if (t.dataset.inc) setQty(t.dataset.inc, (state.cart[t.dataset.inc] || 0) + 1);
+  if (t.dataset.dec) setQty(t.dataset.dec, (state.cart[t.dataset.dec] || 0) - 1);
+  if (t.dataset.del) setQty(t.dataset.del, 0);
+});
+
+$("#openCart").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
+$("#overlay").addEventListener("click", closeCart);
+$("#closeModal").addEventListener("click", closeModal);
+$("#modalBg").addEventListener("click", closeModal);
+$("#checkout").addEventListener("click", checkout);
+$("#clearCart").addEventListener("click", () => { state.cart = {}; saveCart(); renderCart(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeCart(); closeModal(); } });
+
+function onSearch(v, other) { state.search = v; other.value = v; renderGrid(); }
+$("#searchDesktop").addEventListener("input", (e) => onSearch(e.target.value, $("#searchMobile")));
+$("#searchMobile").addEventListener("input", (e) => onSearch(e.target.value, $("#searchDesktop")));
+
+$("#sortSelect").addEventListener("change", (e) => { state.sort = e.target.value; renderGrid(); });
+$("#priceRange").addEventListener("input", (e) => { state.maxPrice = Number(e.target.value); renderGrid(); });
+document.querySelectorAll(".condFilter").forEach(c => c.addEventListener("change", renderGrid));
+$("#btnPromo").addEventListener("click", () => { state.promoOnly = !state.promoOnly; renderGrid(); document.getElementById("produtos").scrollIntoView({ behavior:"smooth" }); });
+
+function clearFilters() {
+  Object.assign(state, { cat:"Todos", search:"", maxPrice:5000, promoOnly:false, sort:"relevance" });
+  $("#searchDesktop").value = ""; $("#searchMobile").value = "";
+  $("#priceRange").value = 5000; $("#sortSelect").value = "relevance";
+  document.querySelectorAll(".condFilter").forEach(c => c.checked = true);
+  renderCats(); renderGrid();
+}
+$("#clearFilters").addEventListener("click", clearFilters);
+$("#emptyClear").addEventListener("click", clearFilters);
+
+/* Início */
+(function init() {
+  const max = Math.ceil(Math.max(...PRODUCTS.map(p => p.price)) / 50) * 50;
+  $("#priceRange").max = max; $("#priceRange").value = max; state.maxPrice = max;
+  renderCats(); renderGrid(); renderCart();
+})();
+</script>
+</body>
+</html>
